@@ -1,0 +1,21 @@
+# Git-Related Files and Folders
+.log
+.diff
+.patch
+
+# CMake-Related Files and Folders
+.build/
+build/
+
+# Clangd-Related Files and Folders
+.cache/
+compile_commands.json
+
+# Python-Related Files and Folders
+__pycache__/
+.venv/
+venv/
+
+# IDE-Related Folders
+.vscode/
+.idea/
