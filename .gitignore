@@ -16,6 +16,10 @@ __pycache__/
 .venv/
 venv/
 
+# Javascript-Related Files and Folders
+node_modules/
+package-lock.json
+
 # IDE-Related Folders
 .vscode/
 .idea/
