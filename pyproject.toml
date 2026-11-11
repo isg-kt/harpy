@@ -1,0 +1,23 @@
+[tool.black]
+line-length = 74
+target-version = ['py313', 'py314', 'py315']
+exclude = '''
+(
+  /(
+    \.log
+    | \.diff
+    | \.patch
+    | \.build/
+    | build/
+    | \.cache/
+    | compile_commands.json
+    | __pycache__/
+    | \.venv/
+    | venv/
+    | node_modules/
+    | package-lock.json
+    | \.vscode/
+    | \.idea/
+  )/
+)
+'''
