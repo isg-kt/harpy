@@ -1,0 +1,40 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: prettier
+        name: Format Markdown and YAML with Prettier
+        entry: npm exec -- prettier --write --ignore-unknown
+        language: system
+        files: \.(md|markdown|yaml|yml)$
+
+      - id: black
+        name: Format Python with Black
+        entry: black
+        language: system
+        types_or: [python, pyi]
+
+      - id: rstfmt
+        name: Format reStructuredText
+        entry: rstfmt
+        language: python
+        additional_dependencies: [rstfmt==0.0.14]
+        files: \.rst$
+
+      - id: clang-format
+        name: Format C++
+        entry: clang-format -i
+        language: system
+        files: \.(cppm|cpp|h|ixx)$
