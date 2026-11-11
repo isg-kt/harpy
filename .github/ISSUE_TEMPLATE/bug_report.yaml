@@ -1,0 +1,86 @@
+name: "Bug Report"
+description: "Submit a bug report"
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A brief summary of the issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: What was the expected behavior?
+    validations:
+      required: false
+
+  - type: input
+    id: component
+    attributes:
+      label: Component
+      description: Which component is affected?
+    validations:
+      required: true
+
+  - type: input
+    id: os_version
+    attributes:
+      label: OS Version
+      description: Specific version of your OS or distribution.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bug_origin
+    attributes:
+      label: Bug Origin
+      description: Does the bug originate from the generated code or the compiler itself?
+      options:
+        - Generated code
+        - The compiler itself
+        - Not sure / Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: generated_code_example
+    attributes:
+      label: Generated Code Details
+      description: If from generated code, provide a minimal reproducible example and the obtained output.
+    validations:
+      required: false
+
+  - type: input
+    id: toolchain_versions
+    attributes:
+      label: Toolchain Versions
+      description: If from the compiler itself, what Clang and LLD versions were used?
+    validations:
+      required: false
+
+  - type: input
+    id: cmake_preset
+    attributes:
+      label: CMake Preset
+      description: What preset was used with `cmake --preset`?
+    validations:
+      required: false
+
+  - type: input
+    id: valgrind_version
+    attributes:
+      label: Valgrind Version
+      description: If Valgrind was used, what is the installed library version?
+    validations:
+      required: false
+
+  - type: textarea
+    id: free_attachments
+    attributes:
+      label: Additional Context
+      description: Any extra useful information or logs that don't fit above.
+    validations:
+      required: false
