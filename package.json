@@ -1,0 +1,16 @@
+{
+  "name": "harpy",
+  "version": "1.0.0",
+  "description": "The Harpy Programming Language",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isg-kt/harpy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/isg-kt/harpy/issues"
+  },
+  "homepage": "https://github.com/isg-kt/harpy#readme",
+  "devDependencies": {
+    "prettier": "^3.10.0"
+  }
+}
