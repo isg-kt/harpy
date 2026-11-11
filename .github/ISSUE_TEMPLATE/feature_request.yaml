@@ -1,0 +1,58 @@
+name: "Feature Request"
+description: "Submit a feature request"
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A brief summary of the proposed feature.
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation & Problem
+      description: Why is this feature needed? What does it enable that isn't possible or efficient right now?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component_target
+    attributes:
+      label: Target Component
+      description: Where does this feature belong?
+      options:
+        - Language Specification
+        - Compiler
+        - Compiler Support Library
+        - Common Library
+        - Linker
+        - Harpylang
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: usage_snippet
+    attributes:
+      label: Proposed Usage
+      description: Provide a code snippet showing the proposed syntax.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use Cases
+      description: Describe real-world use cases or practical scenarios where this feature is necessary.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Any extra references, prior art, design considerations, or alternative solutions.
+    validations:
+      required: false
