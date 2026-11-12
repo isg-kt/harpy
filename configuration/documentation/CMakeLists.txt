@@ -4,6 +4,12 @@
 # This file is part of the Harpy project and is licensed under the
 # 3-Clause BSD License;
 # For more information, see LICENSE.txt.
+find_package(Python3 COMPONENTS Interpreter)
+
+set(HARPY_DOCUMENTATION_DIRECTORY "${HARPY_ROOT_DIRECTORY}/documentation")
+set(HARPY_BUILD_DIRECTORY
+  "${HARPY_ROOT_DIRECTORY}/build/documentation")
+
 include(sphinx.cmake)
 
 add_custom_target(docClean
