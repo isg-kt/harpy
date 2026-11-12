@@ -1,0 +1,106 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 31
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "linux-amd64-debug",
+      "inherits": "base",
+      "displayName": "Linux amd64 Debug Mode",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "debug",
+        "TARGET_OS": "linux",
+        "TARGET_ARCH": "amd64"
+      }
+    },
+    {
+      "name": "linux-amd64-valgrind",
+      "inherits": "base",
+      "displayName": "Linux amd64 Valgrind Mode",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "valgrind",
+        "TARGET_OS": "linux",
+        "TARGET_ARCH": "amd64"
+      }
+    },
+    {
+      "name": "linux-amd64-sanitizer",
+      "inherits": "base",
+      "displayName": "Linux amd64 Sanitizer Mode",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "sanitizer",
+        "TARGET_OS": "linux",
+        "TARGET_ARCH": "amd64"
+      }
+    },
+    {
+      "name": "linux-amd64-test",
+      "inherits": "base",
+      "displayName": "Linux amd64 Test Mode",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "test",
+        "TARGET_OS": "linux",
+        "TARGET_ARCH": "amd64"
+      }
+    },
+    {
+      "name": "linux-amd64-release-test",
+      "inherits": "base",
+      "displayName": "Linux amd64 Release Test Mode",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "release-test",
+        "TARGET_OS": "linux",
+        "TARGET_ARCH": "amd64"
+      }
+    },
+    {
+      "name": "linux-amd64-release",
+      "inherits": "base",
+      "displayName": "Linux amd64 Release Mode",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "release",
+        "TARGET_OS": "linux",
+        "TARGET_ARCH": "amd64"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-amd64-debug",
+      "configurePreset": "linux-amd64-debug"
+    },
+    {
+      "name": "linux-amd64-valgrind",
+      "configurePreset": "linux-amd64-valgrind"
+    },
+    {
+      "name": "linux-amd64-sanitizer",
+      "configurePreset": "linux-amd64-sanitizer"
+    },
+    {
+      "name": "linux-amd64-test",
+      "configurePreset": "linux-amd64-test"
+    },
+    {
+      "name": "linux-amd64-release-test",
+      "configurePreset": "linux-amd64-release-test"
+    },
+    {
+      "name": "linux-amd64-release",
+      "configurePreset": "linux-amd64-release"
+    }
+  ]
+}
