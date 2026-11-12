@@ -5,13 +5,14 @@
 # 3-Clause BSD License;
 # For more information, see LICENSE.txt.
 cmake_minimum_required(VERSION 3.31)
-project(Harpy
-  LANGUAGES CXX
-  VERSION 0.0.0
-  DESCRIPTION "The Harpy Programming Language Compiler and Linker"
-  HOMEPAGE_URL "https://github.com/isg-kt/harpy")
 
 set(HARPY_ROOT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 set(HARPY_BUILD_DIRECTORY "${HARPY_ROOT_DIRECTORY}/build")
 
 add_subdirectory(configuration)
+
+project(Harpy
+  LANGUAGES CXX
+  VERSION 0.0.0
+  DESCRIPTION "The Harpy Programming Language Compiler and Linker"
+  HOMEPAGE_URL "https://github.com/isg-kt/harpy")
