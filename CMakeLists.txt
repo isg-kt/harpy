@@ -20,3 +20,9 @@ project(Harpy
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  message(FATAL_ERROR
+    "Critical error: Invalid C++ Compiler: ${CMAKE_CXX_COMPILER_ID}.\n"
+    "The Harpy Compiler is strictly dependent on the Clang++ compiler.")
+endif()
