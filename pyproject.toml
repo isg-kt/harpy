@@ -7,17 +7,17 @@ exclude = '''
     \.log
     | \.diff
     | \.patch
-    | \.build/
-    | build/
-    | \.cache/
-    | compile_commands.json
-    | __pycache__/
-    | \.venv/
-    | venv/
-    | node_modules/
-    | package-lock.json
-    | \.vscode/
-    | \.idea/
+    | \.build
+    | build
+    | \.cache
+    | compile_commands\.json
+    | __pycache__
+    | \.venv
+    | venv
+    | node_modules
+    | package-lock\.json
+    | \.vscode
+    | \.idea
   )/
 )
 '''
