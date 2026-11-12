@@ -22,8 +22,3 @@ add_custom_target(docHtml
   COMMAND ${SPHINX_BUILD} -M html "${HARPY_SPHINX_SOURCE_DIRECTORY}"
     "${HARPY_SPHINX_BUILD_DIRECTORY}"
   VERBATIM)
-
-add_custom_target(docClean
-  COMMAND ${CMAKE_COMMAND} -E remove_directory
-    "${HARPY_SPHINX_BUILD_DIRECTORY}"
-  VERBATIM)
