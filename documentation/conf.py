@@ -17,4 +17,10 @@ html_favicon: str = "_static/images/logo.png"
 exclude_patterns: list[str] = []
 html_static_path: list[str] = ["_static"]
 templates_path: list[str] = ["_templates"]
-extensions: list[str] = ["sphinx_rtd_theme", "sphinx_copybutton"]
+extensions: list[str] = [
+    "sphinx_rtd_theme",
+    "sphinx_copybutton",
+    "breathe",
+]
+breathe_projects: dict[str, str] = {"Harpy": "../build/documentation/xml"}
+breathe_default_project: str = "Harpy"
