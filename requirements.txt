@@ -6,7 +6,7 @@ cfgv==3.5.0
 charset-normalizer==3.5.2
 click==8.5.1
 distlib==0.4.4
-docutils==0.23
+docutils==0.22.4
 filelock==4.2.10
 identify==2.6.20
 idna==3.20
@@ -28,9 +28,12 @@ roman-numerals==4.1.0
 rstfmt==0.0.14
 snowballstemmer==3.1.1
 Sphinx==9.2.0
+sphinx-copybutton==0.5.2
+sphinx_rtd_theme==3.1.0
 sphinxcontrib-applehelp==2.0.0
 sphinxcontrib-devhelp==2.0.0
 sphinxcontrib-htmlhelp==2.1.0
+sphinxcontrib-jquery==4.1
 sphinxcontrib-jsmath==2.0.0
 sphinxcontrib-qthelp==2.0.0
 sphinxcontrib-serializinghtml==2.0.0
