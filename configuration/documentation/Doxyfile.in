@@ -1,0 +1,70 @@
+# File: configuration/documentation/Doxyfile
+# Brief: Doxygen configuration template for Harpy C++ source
+# documentation extraction.
+#
+# This file is part of the Harpy project and is licensed under the
+# 3-Clause BSD License;
+# For more information, see LICENSE.txt.
+DOXYFILE_ENCODING = UTF-8
+PROJECT_NAME = "Harpy"
+PROJECT_BRIEF = "The Harpy Documentation"
+PROJECT_LOGO = $HARPY_ROOT_DIRECTORY$/documentation/_static/images/logo.png
+OUTPUT_DIRECTORY = $HARPY_ROOT_DIRECTORY$/build/documentation/
+CREATE_SUBDIRS = YES
+CREATE_SUBDIRS_LEVEL = 8
+OUTPUT_LANGUAGE = English
+BRIEF_MEMBER_DESC = YES
+REPEAT_BRIEF = YES
+ABBREVIATE_BRIEF = "The $name class"  \
+                   "The $name widget" \
+                   "The $name file"   \
+                   is                 \
+                   provides           \
+                   specifies          \
+                   contains           \
+                   represents         \
+                   a                  \
+                   an                 \
+                   the
+FULL_PATH_NAMES = YES
+TAB_SIZE = 2
+MARKDOWN_SUPPORT = YES
+MARKDOWN_ID_STYLE = GITHUB
+NUM_PROC_THREADS = $NPROC$
+EXTRACT_ALL = YES
+EXTRACT_PRIVATE = YES
+EXTRACT_PRIV_VIRTUAL = YES
+EXTRACT_PACKAGE = YES
+EXTRACT_STATIC = YES
+EXTRACT_LOCAL_CLASSES = YES
+GENERATE_TODOLIST = YES
+GENERATE_TESTLIST = YES
+GENERATE_BUGLIST = YES
+GENERATE_DEPRECATEDLIST = YES
+QUIET = NO
+WARNINGS = YES
+WARN_IF_UNDOCUMENTED = YES
+WARN_IF_DOC_ERROR = YES
+WARN_IF_INCOMPLETE_DOC = YES
+WARN_FORMAT = "$file:$line: $text"
+WARN_LINE_FORMAT = "at line $line of file $file"
+INPUT_ENCODING = UTF-8
+FILE_PATTERNS = *.cpp  \
+                *.cppm \
+                *.ixx  \
+                *.h
+EXCLUDE =
+RECURSIVE = YES
+SOURCE_BROWSER = YES
+INLINE_SOURCES = YES
+CLANG_ASSISTED_PARSING = YES
+CLANG_ADD_INC_PATHS = YES
+CLANG_OPTIONS =
+GENERATE_HTML = NO
+GENERATE_LATEX = NO
+GENERATE_XML = YES
+XML_OUTPUT = xml
+ENABLE_PREPROCESSING = YES
+MACRO_EXPANSION = NO
+SEARCH_INCLUDES = YES
+INCLUDE_PATH = $HARPY_ROOT_DIRECTORY$
