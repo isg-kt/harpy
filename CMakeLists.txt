@@ -16,3 +16,7 @@ project(Harpy
   VERSION 0.0.0
   DESCRIPTION "The Harpy Programming Language Compiler and Linker"
   HOMEPAGE_URL "https://github.com/isg-kt/harpy")
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
