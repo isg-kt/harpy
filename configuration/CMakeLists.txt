@@ -5,3 +5,4 @@
 # 3-Clause BSD License;
 # For more information, see LICENSE.txt.
 add_subdirectory(documentation)
+add_subdirectory(toolchain)
