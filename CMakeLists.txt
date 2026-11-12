@@ -36,3 +36,11 @@ target_compile_options(global_configuration INTERFACE
 target_link_options(global_configuration INTERFACE
   -Wl,--fatal-warnings
   -Wl,--as-needed)
+
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  set(CMAKE_BUILD_TYPE "release"
+    CACHE STRING "Choose the type of build."
+    FORCE)
+endif()
+
+string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type)
