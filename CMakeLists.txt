@@ -26,3 +26,13 @@ if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     "Critical error: Invalid C++ Compiler: ${CMAKE_CXX_COMPILER_ID}.\n"
     "The Harpy Compiler is strictly dependent on the Clang++ compiler.")
 endif()
+
+add_library(global_configuration INTERFACE)
+
+target_compile_options(global_configuration INTERFACE
+  -Wall -Wextra -Wpedantic -fno-exceptions -fno-rtti
+  -fno-omit-frame-pointer -nostdinc++ -fno-common
+  -DHarpyIsOnLinux -DHarpyIsOnAmd64)
+target_link_options(global_configuration INTERFACE
+  -Wl,--fatal-warnings
+  -Wl,--as-needed)
