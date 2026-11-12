@@ -133,3 +133,6 @@ else()
 endif()
 
 message("Message: Build Type Detected: ${build_type}")
+
+add_subdirectory(compiler)
+add_subdirectory(library)
