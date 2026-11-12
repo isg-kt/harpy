@@ -7,8 +7,6 @@
 find_package(Python3 COMPONENTS Interpreter)
 
 set(HARPY_DOCUMENTATION_DIRECTORY "${HARPY_ROOT_DIRECTORY}/documentation")
-set(HARPY_BUILD_DIRECTORY
-  "${HARPY_ROOT_DIRECTORY}/build/documentation")
 
 include(sphinx.cmake)
 

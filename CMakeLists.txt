@@ -12,5 +12,6 @@ project(Harpy
   HOMEPAGE_URL "https://github.com/isg-kt/harpy")
 
 set(HARPY_ROOT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
+set(HARPY_BUILD_DIRECTORY "${HARPY_ROOT_DIRECTORY}/build")
 
 add_subdirectory(configuration)

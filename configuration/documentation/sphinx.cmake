@@ -15,5 +15,5 @@ endif()
 
 add_custom_target(docHtml
   COMMAND ${SPHINX_BUILD} -M html "${HARPY_DOCUMENTATION_DIRECTORY}"
-    "${HARPY_BUILD_DIRECTORY}"
+    "${HARPY_BUILD_DIRECTORY}/documentation"
   VERBATIM)
