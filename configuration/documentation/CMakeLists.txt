@@ -9,8 +9,12 @@ find_package(Python3 COMPONENTS Interpreter)
 set(HARPY_DOCUMENTATION_DIRECTORY "${HARPY_ROOT_DIRECTORY}/documentation")
 
 include(sphinx.cmake)
+include(doxygen.cmake)
+
+add_custom_target(docGen
+  DEPENDS docXml docHtml)
 
 add_custom_target(docClean
   COMMAND ${CMAKE_COMMAND} -E remove_directory
-    "${HARPY_SPHINX_BUILD_DIRECTORY}"
+    "${HARPY_BUILD_DIRECTORY}/documentation"
   VERBATIM)
