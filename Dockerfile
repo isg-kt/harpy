@@ -12,6 +12,7 @@ RUN apk update && apk add --no-cache                                     \
   build-base                                                             \
   clang                                                                  \
   lld                                                                    \
+  compiler-rt                                                            \
   ninja                                                                  \
   cmake                                                                  \
   valgrind                                                               \
