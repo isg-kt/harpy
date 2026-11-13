@@ -71,17 +71,13 @@ elseif(build_type MATCHES "^sanitizer")
 
 elseif(build_type MATCHES "^valgrind")
   find_package(PkgConfig REQUIRED)
-  pkg_check_modules(VALGRIND
-    REQUIRED valgrind
-    IMPORTED_TARGET valgrind)
+  pkg_check_modules(VALGRIND REQUIRED valgrind)
 
-  if(VALGRIND_LIBRARY_DIRS)
-    target_link_directories(global_configuration INTERFACE
-      ${VALGRIND_LIBRARY_DIRS})
+  if(VALGRIND_INCLUDE_DIRS)
+    target_include_directories(global_configuration INTERFACE
+      ${VALGRIND_INCLUDE_DIRS})
   endif()
 
-  target_link_libraries(global_configuration INTERFACE
-    PkgConfig::VALGRIND)
   target_compile_options(global_configuration INTERFACE
     -Og -g3 -fno-omit-frame-pointer -DHarpyIsInDebugMode
     -DValgrindIsActive)
