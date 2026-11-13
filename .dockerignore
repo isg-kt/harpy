@@ -1,0 +1,38 @@
+# Git-Related Files and Folders
+.git/
+.github/
+.gitignore
+.gitattributes
+.pre-commit-config.yaml
+.log
+.diff
+.patch
+
+# CMake-Related Files and Folders
+.build/
+build/
+
+# Clangd-Related Files and Folders
+.cache/
+compile_commands.json
+
+# Python-Related Files and Folders
+__pycache__/
+.venv/
+venv/
+pyproject.toml
+requirements.txt
+
+# Javascript-Related Files and Folders
+node_modules/
+package.json
+package-lock.json
+
+# IDE-Related Folders
+.vscode/
+.idea/
+
+# Documentation-Related Files and Folders
+documentation/
+LICENSE.txt
+README.md
