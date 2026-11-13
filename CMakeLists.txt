@@ -132,3 +132,7 @@ message("Message: Build Type Detected: ${build_type}")
 
 add_subdirectory(compiler)
 add_subdirectory(library)
+
+if(build_type MATCHES "^release-test" OR build_type MATCHES "^test")
+  add_subdirectory(tests)
+endif()
