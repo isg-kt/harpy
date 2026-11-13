@@ -6,9 +6,9 @@
 # For more information, see LICENSE.txt.
 find_program(SPHINX_BUILD NAMES sphinx-build)
 
-if(NOT SPHINX_BUILD)
+if(NOT SPHINX_BUILD AND NOT Python3_FOUND)
     message(WARNING
-        "[WARNING] Sphinx not found.\n"
+        "[WARNING] Sphinx or Python not found.\n"
         "Documentation targets will not be available.")
     return()
 endif()
