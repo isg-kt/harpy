@@ -6,9 +6,9 @@
 # For more information, see LICENSE.txt.
 find_package(Doxygen)
 
-if(NOT Doxygen_FOUND)
+if(NOT Doxygen_FOUND AND NOT Python3_FOUND)
     message(WARNING
-        "[WARNING] Doxygen not found.\n"
+        "[WARNING] Doxygen or Python not found.\n"
         "Documentation targets will not be available.")
     return()
 endif()
