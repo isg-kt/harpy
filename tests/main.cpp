@@ -1,4 +1,3 @@
-#if HarpyIsInTestMode
 int
 main (int argumentCounter, char *argumentVector[])
 {
@@ -7,4 +6,3 @@ main (int argumentCounter, char *argumentVector[])
 
   return 0;
 }
-#endif // HarpyIsInTestMode
