@@ -1,0 +1,38 @@
+name: "Compiler Matrix Build"
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-modes:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mode:
+          - debug
+          - valgrind
+          - sanitizer
+          - test
+          - release-test
+          - release
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          lfs: true
+
+      - name: Build Docker image for ${{ matrix.mode }}
+        run: |
+          docker build                                                   \
+            --build-arg TARGET_MODE=${{ matrix.mode }}                   \
+            -t harpy-compiler:${{ matrix.mode }}                         \
+            .
