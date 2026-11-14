@@ -40,7 +40,7 @@ jobs:
           cache: "npm"
 
       - name: Install Node dependencies
-        run: npm i
+        run: npm ci
 
       - name: Install system tools
         run: |
