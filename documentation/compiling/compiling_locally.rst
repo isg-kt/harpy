@@ -51,6 +51,8 @@ on your host system:
    <hr>
    <br>
 
+.. _build-configurations:
+
 **********************
  Build Configurations
 **********************
