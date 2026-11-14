@@ -2,9 +2,9 @@
  Compiling Harpy Locally
 #########################
 
-This document outlines the procedure for building the Harpy compiler
+This document outlines the procedure for building the **Harpy compiler**
 from source, covering required toolchain dependencies, build
-configurations, and compilation steps for supported host environments.
+configurations, and compilation steps for *supported host environments*.
 
 .. raw:: html
 
@@ -41,7 +41,7 @@ on your host system:
 
 .. note::
 
-   If your distribution uses a `musl` libc and you plan to build with
+   If your distribution uses a ``musl`` libc and you plan to build with
    sanitizer targets, you will also need the `compiler-rt
    <https://compiler-rt.llvm.org/>`_ runtime library installed.
 
@@ -55,8 +55,8 @@ on your host system:
  Build Configurations
 **********************
 
-If your objective is simply to use the compiler, you can proceed
-directly with the release preset. For development and contributions,
+If your objective is simply to *use the compiler*, you can proceed
+directly with the release preset. For **development and contributions**,
 understanding the alternative build configurations is essential.
 
 .. list-table::
@@ -78,20 +78,20 @@ understanding the alternative build configurations is essential.
    -  -  ``linux-amd64-release-test``
       -  Optimized test suite execution
 
-The release configuration serves as the default production mode,
-applying aggressive optimizations like link-time optimization and dead
-code elimination to maximize execution performance.
+The **release configuration** serves as the default production mode,
+applying aggressive optimizations like *link-time optimization* and
+*dead code elimination* to maximize execution performance.
 
-The debug configuration turns off optimizations and enables extensive
-diagnostic warnings, stack protection mechanisms, and debug definitions
-to assist with local troubleshooting. For advanced memory analysis, the
-sanitizer configuration instruments the binary with address and
-undefined behavior sanitizers, while the valgrind configuration
-integrates specific debugging headers and symbols for external analysis
-tools.
+The **debug configuration** turns off optimizations and enables
+extensive diagnostic warnings, *stack protection mechanisms*, and debug
+definitions to assist with local troubleshooting. For advanced memory
+analysis, the **sanitizer configuration** instruments the binary with
+address and undefined behavior sanitizers, while the **valgrind
+configuration** integrates specific debugging headers and symbols for
+external analysis tools.
 
-Finally, the test and release-test configurations enforce strict
-error-on-warning policies and activate internal test hooks, operating
+Finally, the **test** and **release-test** configurations enforce strict
+*error-on-warning* policies and activate internal test hooks, operating
 under unoptimized or fully optimized compilation profiles respectively.
 
 .. raw:: html
@@ -104,7 +104,7 @@ under unoptimized or fully optimized compilation profiles respectively.
  Building the Compiler
 ***********************
 
-After identifying your target preset identifier, execute CMake to
+After identifying your target preset identifier, execute ``CMake`` to
 configure and trigger the build step:
 
 .. code:: shell
