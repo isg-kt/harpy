@@ -12,6 +12,16 @@ import argparse
 import pathlib
 import os
 import subprocess
+import enum
+
+
+class FormatHubMode(enum.Enum):
+    """
+    Defines the execution mode for the formatting hub utility.
+    """
+
+    FORMAT = enum.auto()
+    CHECK = enum.auto()
 
 
 def _parse_command_line_arguments() -> argparse.Namespace:
@@ -21,16 +31,19 @@ def _parse_command_line_arguments() -> argparse.Namespace:
 
     Returns:
         argparse.Namespace: Parsed command-line arguments containing
-        target and root directory paths.
+        target, root directory paths, and verification flag.
     """
     parser: argparse.ArgumentParser = argparse.ArgumentParser(
         prog="Format Hub",
         usage=(
             "python3 configuration/format/format.py "
-            "--target TARGET"
-            "--root ROOT_DIRECTORY"
+            "--target TARGET "
+            "--root ROOT_DIRECTORY "
+            "[--verify]"
         ),
-        description="Formats the Harpy's code and documentation.",
+        description=(
+            "Formats or verifies Harpy's code and documentation."
+        ),
     )
 
     parser.add_argument(
@@ -38,16 +51,25 @@ def _parse_command_line_arguments() -> argparse.Namespace:
         nargs="?",
         default="all",
         choices=["cpp", "py", "doc", "all"],
-        help="Specify which component to format (default: all)",
+        help=(
+            "Specify which component to format or verify (default: all)"
+        ),
     )
     parser.add_argument(
         "--root", required=True, help="Root directory of the project"
+    )
+    parser.add_argument(
+        "--verify",
+        action="store_true",
+        help="Verify if files are properly formatted without modifying them",
     )
 
     return parser.parse_args()
 
 
-def _run_clang_format(project_root: pathlib.Path) -> None:
+def _run_clang_format(
+    project_root: pathlib.Path, mode: FormatHubMode
+) -> None:
     """
     Formats C++ source files using clang-format, respecting git ignore
     rules and batching requests to prevent command-line length limits.
@@ -55,6 +77,7 @@ def _run_clang_format(project_root: pathlib.Path) -> None:
     Args:
         project_root (pathlib.Path): Absolute path to the root directory
         of the project.
+        mode (FormatHubMode): Execution mode.
 
     Returns:
         None
@@ -96,16 +119,29 @@ def _run_clang_format(project_root: pathlib.Path) -> None:
         print("No C++ files found for formatting.")
         return
 
+    is_check: bool = mode == FormatHubMode.CHECK
+    action_message: str = "Checking" if is_check else "Formatting"
+
     print(
-        f"Formatting {len(filtered_source_files)} C++ files with "
+        f"{action_message} {len(filtered_source_files)} C++ files with "
         "clang-format..."
     )
 
-    base_command_list: list[str] = [
-        "clang-format",
-        "-i",
-        f"--style=file:{project_root / '.clang-format'}",
-    ]
+    base_command_list: list[str] = (
+        [
+            "clang-format",
+            "--dry-run",
+            "--Werror",
+            f"--style=file:{project_root / '.clang-format'}",
+        ]
+        if is_check
+        else [
+            "clang-format",
+            "-i",
+            f"--style=file:{project_root / '.clang-format'}",
+        ]
+    )
+
     base_length: int = sum(
         len(argument) + 1 for argument in base_command_list
     )
@@ -147,7 +183,7 @@ def _run_clang_format(project_root: pathlib.Path) -> None:
             sys.exit(sub_result.returncode)
 
 
-def _run_black(project_root: pathlib.Path) -> None:
+def _run_black(project_root: pathlib.Path, mode: FormatHubMode) -> None:
     """
     Formats Python source files using the Black formatter based on the
     project's pyproject.toml configuration.
@@ -155,19 +191,33 @@ def _run_black(project_root: pathlib.Path) -> None:
     Args:
         project_root (pathlib.Path): Absolute path to the root directory
         of the project.
+        mode (FormatHubMode): Execution mode.
 
     Returns:
         None
     """
-    print(f"Formatting Python files with black...")
-    pyproject_toml_path: pathlib.Path = project_root / "pyproject.toml"
+    is_check: bool = mode == FormatHubMode.CHECK
+    action_message: str = "Checking" if is_check else "Formatting"
 
-    command_list: list[str] = [
-        "black",
-        "--config",
-        str(pyproject_toml_path),
-        str(project_root),
-    ]
+    print(f"{action_message} Python files with black...")
+
+    pyproject_toml_path: pathlib.Path = project_root / "pyproject.toml"
+    command_list: list[str] = (
+        [
+            "black",
+            "--check",
+            "--config",
+            str(pyproject_toml_path),
+            str(project_root),
+        ]
+        if is_check
+        else [
+            "black",
+            "--config",
+            str(pyproject_toml_path),
+            str(project_root),
+        ]
+    )
 
     result: subprocess.CompletedProcess[bytes] = subprocess.run(
         command_list,
@@ -179,7 +229,9 @@ def _run_black(project_root: pathlib.Path) -> None:
         sys.exit(result.returncode)
 
 
-def _run_prettier(project_root: pathlib.Path) -> None:
+def _run_prettier(
+    project_root: pathlib.Path, mode: FormatHubMode
+) -> None:
     """
     Formats documentation and web asset files using Prettier, respecting
     git ignore rules.
@@ -187,11 +239,15 @@ def _run_prettier(project_root: pathlib.Path) -> None:
     Args:
         project_root (pathlib.Path): Absolute path to the root directory
         of the project.
+        mode (FormatHubMode): Execution mode.
 
     Returns:
         None
     """
-    print(f"Formatting Documentation files with prettier...")
+    is_check: bool = mode == FormatHubMode.CHECK
+    action_message: str = "Checking" if is_check else "Formatting"
+
+    print(f"{action_message} Documentation files with prettier...")
 
     git_ignore_path: pathlib.Path = project_root / ".gitignore"
 
@@ -200,7 +256,7 @@ def _run_prettier(project_root: pathlib.Path) -> None:
         "exec",
         "--",
         "prettier",
-        "--write",
+        "--check" if is_check else "--write",
         "--ignore-unknown",
         "--ignore-path",
         str(git_ignore_path),
@@ -217,7 +273,7 @@ def _run_prettier(project_root: pathlib.Path) -> None:
         sys.exit(result.returncode)
 
 
-def _run_rstfmt(project_root: pathlib.Path) -> None:
+def _run_rstfmt(project_root: pathlib.Path, mode: FormatHubMode) -> None:
     """
     Formats reStructuredText files using rstfmt, respecting git ignore
     rules and batching requests to prevent command-line length limits.
@@ -225,6 +281,7 @@ def _run_rstfmt(project_root: pathlib.Path) -> None:
     Args:
         project_root (pathlib.Path): Absolute path to the root directory
         of the project.
+        mode (FormatHubMode): Execution mode.
 
     Returns:
         None
@@ -266,12 +323,17 @@ def _run_rstfmt(project_root: pathlib.Path) -> None:
         print("No reStructuredText files found for formatting.")
         return
 
+    is_check: bool = mode == FormatHubMode.CHECK
+    action_message: str = "Checking" if is_check else "Formatting"
+
     print(
-        f"Formatting {len(filtered_source_files)} reStructuredText files with "
-        "rstfmt..."
+        f"{action_message} {len(filtered_source_files)} reStructuredText "
+        "files with rstfmt..."
     )
 
-    base_command_list: list[str] = ["rstfmt"]
+    base_command_list: list[str] = (
+        ["rstfmt", "--check"] if is_check else ["rstfmt"]
+    )
     base_length: int = sum(
         len(argument) + 1 for argument in base_command_list
     )
@@ -326,14 +388,17 @@ def format() -> None:
     project_root: pathlib.Path = pathlib.Path(
         os.path.abspath(arguments.root)
     )
+    mode: FormatHubMode = (
+        FormatHubMode.CHECK if arguments.verify else FormatHubMode.FORMAT
+    )
 
     if target in ("cpp", "all"):
-        _run_clang_format(project_root)
+        _run_clang_format(project_root, mode)
     if target in ("py", "all"):
-        _run_black(project_root)
+        _run_black(project_root, mode)
     if target in ("doc", "all"):
-        _run_prettier(project_root)
-        _run_rstfmt(project_root)
+        _run_prettier(project_root, mode)
+        _run_rstfmt(project_root, mode)
 
 
 if __name__ == "__main__":
